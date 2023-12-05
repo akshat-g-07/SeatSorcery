@@ -3,6 +3,7 @@
 import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
 import { TrainSchedule } from "./components/TrainScheduleTypes";
+import ShowLoading from "./components/ShowLoading";
 import ShowContent from "./components/ShowContent";
 import ShowError from "../TrainNumberToInfo/components/ShowError";
 export default function TrainNumberPage() {
@@ -71,6 +72,7 @@ export default function TrainNumberPage() {
           Search
         </button>
       </div>
+      {loading && <ShowLoading />}
       {(response || responseError) &&
         (responseError ? (
           <ShowError />
