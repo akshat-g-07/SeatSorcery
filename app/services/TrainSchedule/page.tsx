@@ -6,7 +6,7 @@ import { TrainSchedule } from "./components/TrainScheduleTypes";
 import ShowLoading from "./components/ShowLoading";
 import ShowContent from "./components/ShowContent";
 import ShowError from "../TrainNumberToInfo/components/ShowError";
-export default function TrainNumberPage() {
+export default function TrainSchedulePage() {
   const [validInput, setValidInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [length, setLength] = useState<number | null>();
