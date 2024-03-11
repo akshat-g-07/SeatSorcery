@@ -33,7 +33,7 @@ export default function TrainSchedulePage() {
       const apiResponseVal = await apiResponse.json();
 
       apiResponseVal.status
-        ? setResponseError(false)
+        ? setResponseError(true)
         : setResponse(apiResponseVal);
       setLoading(false);
     }
