@@ -11,6 +11,9 @@ const config: Config = {
       fontFamily: {
         LogoFont: "Edu TAS Beginner",
       },
+      colors: {
+        primaryColor: "#0048FF",
+      },
     },
   },
 };
