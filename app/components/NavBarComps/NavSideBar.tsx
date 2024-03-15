@@ -19,7 +19,7 @@ export default function NavSideBar() {
       navElement.style.boxShadow = "0 15px 30px rgba(0,0,0,0.1)";
       navElement.style.backdropFilter = "blur(5px)";
     } else {
-      navElement.style.backgroundColor = "transparent";
+      navElement.style.backgroundColor = "#F0F8FF";
       navElement.style.boxShadow = "none";
       navElement.style.backdropFilter = "none";
     }
