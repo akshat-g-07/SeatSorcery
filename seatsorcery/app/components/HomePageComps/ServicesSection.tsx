@@ -1,11 +1,9 @@
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import ServicesSectionHover from "./ServiceSectionHover";
 
 export default function ServicesSection() {
   var serviceContainerCSS =
     "flex flex-col lg:flex-row w-full h-auto items-center justify-evenly";
-  var serviceTemplateCSS =
-    "bg-green-500 h-48 rounded-md w-10/12 lg:w-1/3 m-5 flex items-end p-5";
+
   return (
     <>
       <div
@@ -15,76 +13,43 @@ export default function ServicesSection() {
           background: "linear-gradient(180deg, #d1dff066 0%, #ffffff66 100%)",
         }}
       >
+        <div className="flex items-center justify-center -translate-y-3">
+          <div className="w-max flex items-center justify-center rounded-lg bg-slate-200/75 hover:bg-slate-300/50">
+            <div className="h-[2px] w-16 bg-slate-300" />
+            <div className="font-bold mx-2">Other Services</div>
+            <div className="h-[2px] w-16 bg-slate-300" />
+          </div>
+        </div>
         <div className={serviceContainerCSS}>
-          <div className={serviceTemplateCSS}>
-            <ServicesSectionHover idVal="service01">
-              Train Number Information
-              <div className="w-auto flex h-[25px]">
-                <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-              </div>
-            </ServicesSectionHover>
-          </div>
-          <div className={serviceTemplateCSS}>
-            <ServicesSectionHover idVal="service02">
-              Station Code to Name
-              <div className="w-auto flex h-[25px]">
-                <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-              </div>
-            </ServicesSectionHover>
-          </div>
-          <div className={serviceTemplateCSS}>
-            <ServicesSectionHover idVal="service03">
-              Train Number to Name
-              <div className="w-auto flex h-[25px]">
-                <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-              </div>
-            </ServicesSectionHover>
-          </div>
-        </div>
-      </div>
-      <div className={serviceContainerCSS}>
-        <div className={`${serviceTemplateCSS} lg:!w-2/3`}>
-          <ServicesSectionHover idVal="service04">
-            Live Train Status
-            <div className="w-auto flex h-[25px]">
-              <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-            </div>
+          <ServicesSectionHover idVal="service01" imgSrc="trainNumberInfo.jpg">
+            Train Number Information
           </ServicesSectionHover>
-        </div>
-        <div className={serviceTemplateCSS}>
-          <ServicesSectionHover idVal="service05">
-            PNR Check
-            <div className="w-auto flex h-[25px]">
-              <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-            </div>
+          <ServicesSectionHover idVal="service02" imgSrc="stationCode.jpg">
+            Station Code to Name
+          </ServicesSectionHover>
+          <ServicesSectionHover idVal="service03" imgSrc="trainNumberName.png">
+            Train Number to Name
           </ServicesSectionHover>
         </div>
       </div>
       <div className={serviceContainerCSS}>
-        <div className={serviceTemplateCSS}>
-          <ServicesSectionHover idVal="service06">
-            Seat Availability
-            <div className="w-auto flex h-[25px]">
-              <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-            </div>
-          </ServicesSectionHover>
-        </div>
-        <div className={serviceTemplateCSS}>
-          <ServicesSectionHover idVal="service07">
-            Train Schedule
-            <div className="w-auto flex h-[25px]">
-              <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-            </div>
-          </ServicesSectionHover>
-        </div>
-        <div className={serviceTemplateCSS}>
-          <ServicesSectionHover idVal="service08">
-            Coach Layout
-            <div className="w-auto flex h-[25px]">
-              <ArrowOutwardIcon sx={{ fontSize: "15px" }} />
-            </div>
-          </ServicesSectionHover>
-        </div>
+        <ServicesSectionHover idVal="service04" imgSrc="liveStatus.jpg">
+          Live Train Status
+        </ServicesSectionHover>
+        <ServicesSectionHover idVal="service05" imgSrc="pnrCheck.png">
+          PNR Check
+        </ServicesSectionHover>
+      </div>
+      <div className={serviceContainerCSS}>
+        <ServicesSectionHover idVal="service06" imgSrc="seatAvail.jpg">
+          Seat Availability
+        </ServicesSectionHover>
+        <ServicesSectionHover idVal="service07" imgSrc="trainSchedule.png">
+          Train Schedule
+        </ServicesSectionHover>
+        <ServicesSectionHover idVal="service08" imgSrc="trainLayout.jpg">
+          Coach Layout
+        </ServicesSectionHover>
       </div>
     </>
   );
