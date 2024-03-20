@@ -7,7 +7,7 @@ export default function ServicesSection() {
   return (
     <>
       <div
-        className="h-auto w-full"
+        className="h-auto w-full mb-5"
         style={{
           backgroundColor: "red",
           background: "linear-gradient(180deg, #d1dff066 0%, #ffffff66 100%)",
@@ -31,25 +31,25 @@ export default function ServicesSection() {
             Train Number to Name
           </ServicesSectionHover>
         </div>
-      </div>
-      <div className={serviceContainerCSS}>
-        <ServicesSectionHover idVal="service04" imgSrc="liveStatus.jpg">
-          Live Train Status
-        </ServicesSectionHover>
-        <ServicesSectionHover idVal="service05" imgSrc="pnrCheck.png">
-          PNR Check
-        </ServicesSectionHover>
-      </div>
-      <div className={serviceContainerCSS}>
-        <ServicesSectionHover idVal="service06" imgSrc="seatAvail.jpg">
-          Seat Availability
-        </ServicesSectionHover>
-        <ServicesSectionHover idVal="service07" imgSrc="trainSchedule.png">
-          Train Schedule
-        </ServicesSectionHover>
-        <ServicesSectionHover idVal="service08" imgSrc="trainLayout.jpg">
-          Coach Layout
-        </ServicesSectionHover>
+        <div className={serviceContainerCSS}>
+          <ServicesSectionHover idVal="service04" imgSrc="liveStatus.jpg">
+            Live Train Status
+          </ServicesSectionHover>
+          <ServicesSectionHover idVal="service05" imgSrc="pnrCheck.png">
+            PNR Check
+          </ServicesSectionHover>
+        </div>
+        <div className={serviceContainerCSS}>
+          <ServicesSectionHover idVal="service06" imgSrc="seatAvail.jpg">
+            Seat Availability
+          </ServicesSectionHover>
+          <ServicesSectionHover idVal="service07" imgSrc="trainSchedule.png">
+            Train Schedule
+          </ServicesSectionHover>
+          <ServicesSectionHover idVal="service08" imgSrc="trainLayout.jpg">
+            Coach Layout
+          </ServicesSectionHover>
+        </div>
       </div>
     </>
   );
