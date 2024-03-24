@@ -41,23 +41,22 @@ export default function LargeSideBar() {
   };
 
   useEffect(() => {
-    switch (pathname) {
-      case "/":
-        document.getElementById("homeNavBar").style.width = "110%";
-        document.getElementById("servicesNavBar").style.width = "0";
-        document.getElementById("supportNavBar").style.width = "0";
-
-        break;
-      case "/services":
-        document.getElementById("homeNavBar").style.width = "0";
-        document.getElementById("servicesNavBar").style.width = "110%";
-        document.getElementById("supportNavBar").style.width = "0";
-        break;
-      case "/support":
-        document.getElementById("homeNavBar").style.width = "0";
-        document.getElementById("servicesNavBar").style.width = "0";
-        document.getElementById("supportNavBar").style.width = "110%";
-        break;
+    console.log(pathname);
+    if (pathname === "/") {
+      console.log("01");
+      document.getElementById("homeNavBar").style.width = "110%";
+      document.getElementById("servicesNavBar").style.width = "0";
+      document.getElementById("supportNavBar").style.width = "0";
+    } else if (pathname.startsWith("/services")) {
+      console.log("02");
+      document.getElementById("homeNavBar").style.width = "0";
+      document.getElementById("servicesNavBar").style.width = "110%";
+      document.getElementById("supportNavBar").style.width = "0";
+    } else if ("/support") {
+      console.log("03");
+      document.getElementById("homeNavBar").style.width = "0";
+      document.getElementById("servicesNavBar").style.width = "0";
+      document.getElementById("supportNavBar").style.width = "110%";
     }
   }, [pathname]);
 
@@ -70,10 +69,10 @@ export default function LargeSideBar() {
               key={item.linkVal}
               href={item.hrefVal}
               onMouseEnter={() => {
-                pathname !== item.hrefVal && mouseEntered(item.idVal);
+                !pathname.startsWith(item.hrefVal) && mouseEntered(item.idVal);
               }}
               onMouseLeave={() =>
-                pathname !== item.hrefVal && mouseLeft(item.idVal)
+                !pathname.startsWith(item.hrefVal) && mouseLeft(item.idVal)
               }
             >
               {item.iconVal} {"  "}
