@@ -3,6 +3,7 @@
 import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
 import { TrainInfoSuccess } from "./components/TrainInfoTypes";
+import ShowContent from "./components/ShowContent";
 
 export default function TrainNumberPage() {
   const [validInput, setValidInput] = useState<boolean>(false);
@@ -69,7 +70,7 @@ export default function TrainNumberPage() {
         (responseError ? (
           "error..."
         ) : (
-          "content..."
+          <ShowContent responseData={response} />
         ))}
     </>
   );
