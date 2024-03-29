@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react";
 import { TrainInfoSuccess } from "./components/TrainInfoTypes";
 import ShowContent from "./components/ShowContent";
 import ShowError from "./components/ShowError";
+import ShowLoading from "./components/ShowLoading";
 
 export default function TrainNumberPage() {
   const [validInput, setValidInput] = useState<boolean>(false);
@@ -66,7 +67,7 @@ export default function TrainNumberPage() {
           Search
         </button>
       </div>
-      {loading && "loading..."}
+      {loading && <ShowLoading />}
       {(response || responseError) &&
         (responseError ? (
           <ShowError />
