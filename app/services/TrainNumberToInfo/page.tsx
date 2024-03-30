@@ -10,12 +10,14 @@ import ShowLoading from "./components/ShowLoading";
 export default function TrainNumberPage() {
   const [validInput, setValidInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [length, setLength] = useState<number | null>();
   const [responseError, setResponseError] = useState<boolean>(false);
   const [response, setResponse] = useState<TrainInfoSuccess | null>(null);
 
   const validateInput = (event: ChangeEvent<HTMLInputElement>) => {
     const regex = /^\d{5}$/;
     let tempValidVal = regex.test(event.target.value);
+    setLength(event.target.value.length);
     setValidInput(!tempValidVal);
   };
 
@@ -54,15 +56,19 @@ export default function TrainNumberPage() {
           event.key === "Enter" &&
             !validInput &&
             event.target instanceof HTMLInputElement &&
-            event.target.value.length &&
+            length &&
             handleSubmit();
         }}
       />
       <div>
         <button
           onClick={handleSubmit}
-          disabled={validInput}
-          className="border-2 mt-4 border-black w-20 rounded-lg bg-primaryColor hover:bg-primaryColor/75 p-2 font-bold text-white"
+          disabled={!length || validInput}
+          className={`border-2 mt-4 border-black w-20 rounded-lg ${
+            !length || validInput
+              ? "bg-stone-400 hover:bg-stone-400/75"
+              : "bg-primaryColor hover:bg-primaryColor/75"
+          }  p-2 font-bold text-white`}
         >
           Search
         </button>
