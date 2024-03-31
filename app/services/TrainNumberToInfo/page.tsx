@@ -28,14 +28,14 @@ export default function TrainNumberPage() {
     const inputElement = document.getElementById("trainNumberToInfoVal");
     if (inputElement instanceof HTMLInputElement) {
       const inputElementValue = inputElement.value;
-      const response = await fetch(
+      const apiResponse = await fetch(
         `/api/trainNumberToInfo/${inputElementValue}`
       );
-      const responseVal = await response.json();
+      const apiResponseVal = await apiResponse.json();
 
-      responseVal.status
+      apiResponseVal.status
         ? setResponseError(true)
-        : setResponse(responseVal.responseData);
+        : setResponse(apiResponseVal.responseData);
       setLoading(false);
     }
   };
