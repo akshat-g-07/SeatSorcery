@@ -7,6 +7,7 @@ import {
   Station,
   CityStateArrayInterface,
 } from "./components/StationNameTypes";
+import ShowContent from "./components/ShowContent";
 
 export default function SearchStations() {
   const [cityStateArray, setCityStateArray] = useState<
@@ -95,6 +96,8 @@ export default function SearchStations() {
           Search
         </button>
       </div>
+
+      <ShowContent responseData={response} />
     </>
   );
 }
