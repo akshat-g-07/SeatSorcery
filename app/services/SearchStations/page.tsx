@@ -7,6 +7,7 @@ import {
   Station,
   CityStateArrayInterface,
 } from "./components/StationNameTypes";
+import ShowError from "./components/ShowError";
 import ShowContent from "./components/ShowContent";
 
 export default function SearchStations() {
@@ -96,8 +97,12 @@ export default function SearchStations() {
           Search
         </button>
       </div>
-
-      <ShowContent responseData={response} />
+      {(response || !!responseError) &&
+        (responseError ? (
+          <ShowError errorCode={responseError} />
+        ) : (
+          <ShowContent responseData={response} />
+        ))}
     </>
   );
 }
