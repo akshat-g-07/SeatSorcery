@@ -7,6 +7,7 @@ import {
   Station,
   CityStateArrayInterface,
 } from "./components/StationNameTypes";
+import ShowLoading from "./components/ShowLoading";
 import ShowError from "./components/ShowError";
 import ShowContent from "./components/ShowContent";
 
@@ -97,6 +98,7 @@ export default function SearchStations() {
           Search
         </button>
       </div>
+      {loading && <ShowLoading />}
       {(response || !!responseError) &&
         (responseError ? (
           <ShowError errorCode={responseError} />
