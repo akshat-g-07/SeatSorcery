@@ -1,8 +1,10 @@
+import { NextRequest, NextResponse } from "next/server";
+
 interface GetContext {
   params: { stationName: string };
 }
 
-export async function GET(request: Request, context: GetContext) {
+export async function GET(request: NextRequest, context: GetContext) {
   const url = "https://rstations.p.rapidapi.com/";
   const options = {
     method: "POST",
@@ -19,10 +21,16 @@ export async function GET(request: Request, context: GetContext) {
     const response = await fetch(url, options);
     const result = await response.text();
     return result.length > 2
-      ? Response.json({ result })
-      : Response.json({ status: 404 });
+      ? new NextResponse(JSON.stringify(result), { status: 200 })
+      : new NextResponse(
+          JSON.stringify({ errorMessage: "Station Not Found" }),
+          { status: 404 }
+        );
   } catch (error) {
     console.error(error);
-    return Response.json({ status: 400 });
+    return new NextResponse(
+      JSON.stringify({ errorMessage: "Something on API side went wrong" }),
+      { status: 500 }
+    );
   }
 }
