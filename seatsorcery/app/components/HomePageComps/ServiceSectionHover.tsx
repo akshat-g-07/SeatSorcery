@@ -69,65 +69,67 @@ export default function ServicesSectionHover({
       break;
   }
 
-  const [widthOfElement, setWidthOfElement] = useState<string>();
-  const [hoveredElement, setHoveredElement] = useState<HTMLElement>();
+  const [widthOfElement, setWidthOfElement] = useState<string>("");
+  const [hoveredElement, setHoveredElement] = useState<HTMLElement | null>(
+    null
+  );
 
   const outerMouseEnterEvent =
-    window.innerWidth < 1024
+    typeof window !== "undefined" && window.innerWidth < 1024
       ? () => {
           return;
         }
       : () => {
-          document.getElementById(`parent${idVal}`).style.background =
+          document.getElementById(`parent${idVal}`)!.style.background =
             hoveredBGColor;
         };
 
   const outerMouseLeaveEvent =
-    window.innerWidth < 1024
+    typeof window !== "undefined" && window.innerWidth < 1024
       ? () => {
           return;
         }
       : () => {
-          document.getElementById(`parent${idVal}`).style.background =
+          document.getElementById(`parent${idVal}`)!.style.background =
             primaryBGColor;
         };
 
   const innerMouseEnterEvent =
-    window.innerWidth < 1024
+    typeof window !== "undefined" && window.innerWidth < 1024
       ? () => {
           return;
         }
       : () => {
-          hoveredElement.style.width = "100%";
-          hoveredElement.style.textDecoration = "underline";
-          hoveredElement.style.fontWeight = "600";
+          hoveredElement!.style.width = "100%";
+          hoveredElement!.style.textDecoration = "underline";
+          hoveredElement!.style.fontWeight = "600";
         };
 
   const innerMouseLeaveEvent =
-    window.innerWidth < 1024
+    typeof window !== "undefined" && window.innerWidth < 1024
       ? () => {
           return;
         }
       : () => {
-          hoveredElement.style.width = widthOfElement;
-          hoveredElement.style.textDecoration = "none";
-          hoveredElement.style.fontWeight = "400";
+          hoveredElement!.style.width = widthOfElement;
+          hoveredElement!.style.textDecoration = "none";
+          hoveredElement!.style.fontWeight = "400";
         };
 
   useEffect(() => {
     let tempImageElement = document.getElementById(`image${idVal}`);
-    tempImageElement.style.top = topVal;
-    tempImageElement.style.left = leftVal;
+    tempImageElement!.style.top = topVal;
+    tempImageElement!.style.left = leftVal;
 
     let tempParentElement = document.getElementById(`parent${idVal}`);
-    tempParentElement.style.background = primaryBGColor;
+    tempParentElement!.style.background = primaryBGColor;
 
     let tempElement = document.getElementById(idVal);
     let tempWidth =
-      window.innerWidth < 1024
-        ? tempElement.offsetWidth
-        : tempElement.offsetWidth - 8.5 + "px";
-    tempElement.style.width = tempWidth;
+      typeof window !== "undefined" && window.innerWidth < 1024
+        ? String(tempElement!.offsetWidth)
+        : tempElement!.offsetWidth - 8.5 + "px";
+    tempElement!.style.width = tempWidth;
     setHoveredElement(tempElement);
     setWidthOfElement(tempWidth);
   }, []);
@@ -151,7 +153,7 @@ export default function ServicesSectionHover({
           <Image
             src={`/services/${imgSrc}`}
             fill={true}
-            alt=""
+            alt={idVal}
             style={{
               borderRadius: "7.5px",
             }}
