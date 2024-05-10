@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
+    "country-state-city": "^3.2.1",
     "framer-motion": "^10.16.4",
     "next": "14.0.1",
     "nextjs-toploader": "^1.6.4",
