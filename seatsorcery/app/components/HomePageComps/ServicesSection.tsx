@@ -25,10 +25,13 @@ export default function ServicesSection() {
             Train Number Information
           </ServicesSectionHover>
           <ServicesSectionHover idVal="service02" imgSrc="stationCode.jpg">
-            Station Code to Name
+            Search Stations
           </ServicesSectionHover>
-          <ServicesSectionHover idVal="service03" imgSrc="trainNumberName.png">
-            Train Number to Name
+          <ServicesSectionHover
+            idVal="service03"
+            imgSrc="trainbetweenStations.png"
+          >
+            Train Between Stations
           </ServicesSectionHover>
         </div>
         <div className={serviceContainerCSS}>
