@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SettingsIcon from "@mui/icons-material/Settings";
-import HomeIcon from "@mui/icons-material/Home";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import LogInButton from "./LogInButton";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -11,10 +11,12 @@ export default function LargeSideBar() {
 
   const LinkArray = [
     {
-      hrefVal: "/",
-      idVal: "homeNavBar",
-      iconVal: <HomeIcon sx={{ fontSize: "20px", marginBottom: "4px" }} />,
-      linkVal: "Home",
+      hrefVal: "/sorcery",
+      idVal: "sorceryNavBar",
+      iconVal: (
+        <AutoFixHighIcon sx={{ fontSize: "20px", marginBottom: "4px" }} />
+      ),
+      linkVal: "Start Sorcery",
     },
     {
       hrefVal: "/services",
@@ -33,30 +35,26 @@ export default function LargeSideBar() {
   ];
 
   const mouseEntered = (idVal: string) => {
-    document.getElementById(idVal).style.width = "110%";
+    document.getElementById(idVal)!.style.width = "110%";
   };
 
   const mouseLeft = (idVal: string) => {
-    document.getElementById(idVal).style.width = "0";
+    document.getElementById(idVal)!.style.width = "0";
   };
 
   useEffect(() => {
-    console.log(pathname);
-    if (pathname === "/") {
-      console.log("01");
-      document.getElementById("homeNavBar").style.width = "110%";
-      document.getElementById("servicesNavBar").style.width = "0";
-      document.getElementById("supportNavBar").style.width = "0";
+    if (pathname === "/sorcery") {
+      document.getElementById("sorceryNavBar")!.style.width = "110%";
+      document.getElementById("servicesNavBar")!.style.width = "0";
+      document.getElementById("supportNavBar")!.style.width = "0";
     } else if (pathname.startsWith("/services")) {
-      console.log("02");
-      document.getElementById("homeNavBar").style.width = "0";
-      document.getElementById("servicesNavBar").style.width = "110%";
-      document.getElementById("supportNavBar").style.width = "0";
-    } else if ("/support") {
-      console.log("03");
-      document.getElementById("homeNavBar").style.width = "0";
-      document.getElementById("servicesNavBar").style.width = "0";
-      document.getElementById("supportNavBar").style.width = "110%";
+      document.getElementById("sorceryNavBar")!.style.width = "0";
+      document.getElementById("servicesNavBar")!.style.width = "110%";
+      document.getElementById("supportNavBar")!.style.width = "0";
+    } else if (pathname.startsWith("/support")) {
+      document.getElementById("sorceryNavBar")!.style.width = "0";
+      document.getElementById("servicesNavBar")!.style.width = "0";
+      document.getElementById("supportNavBar")!.style.width = "110%";
     }
   }, [pathname]);
 
@@ -79,7 +77,7 @@ export default function LargeSideBar() {
               {item.linkVal}
               <div
                 id={item.idVal}
-                className="h-2 bg-primaryColor duration-300"
+                className="w-0 h-2 bg-primaryColor duration-300"
               />
             </Link>
           );
