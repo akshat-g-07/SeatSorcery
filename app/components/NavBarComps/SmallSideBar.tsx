@@ -21,9 +21,9 @@ export default function SmallSideBar() {
         }`}
         onClick={() => {
           if (navOpen) {
-            document.getElementById("appLogoNameSpan").style.color = "#0048FF";
+            document.getElementById("appLogoNameSpan")!.style.color = "#0048FF";
           } else {
-            document.getElementById("appLogoNameSpan").style.color = "white";
+            document.getElementById("appLogoNameSpan")!.style.color = "white";
           }
           setNavOpen(!navOpen);
         }}
