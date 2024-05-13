@@ -15,13 +15,11 @@ export default function NavSideBar() {
   const handleScroll = () => {
     const navElement = document.querySelector("nav");
     if (window.scrollY) {
-      navElement.style.backgroundColor = "rgba(255,255,255,0.5)";
-      navElement.style.boxShadow = "0 15px 30px rgba(0,0,0,0.1)";
-      navElement.style.backdropFilter = "blur(5px)";
+      navElement!.style.backgroundColor = "white";
+      navElement!.style.boxShadow = "0 15px 30px rgba(0,0,0,0.1)";
     } else {
-      navElement.style.backgroundColor = "#F0F8FF";
-      navElement.style.boxShadow = "none";
-      navElement.style.backdropFilter = "none";
+      navElement!.style.backgroundColor = "#F0F8FF";
+      navElement!.style.boxShadow = "none";
     }
   };
 
