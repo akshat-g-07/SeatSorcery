@@ -8,17 +8,17 @@ import {
   CityStateArrayInterface,
 } from "./components/StationNameTypes";
 import ShowLoading from "./components/ShowLoading";
-import ShowError from "./components/ShowError";
 import ShowContent from "./components/ShowContent";
+import ShowError from "../components/ShowError";
 
-export default function SearchStations() {
+export default function SearchStationsPage() {
   const [cityStateArray, setCityStateArray] = useState<
     CityStateArrayInterface[] | null
   >(null);
   const [validInput, setValidInput] = useState<string | undefined>(undefined);
   const [response, setResponse] = useState<Station[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [responseError, setResponseError] = useState<number>(0);
+  const [responseError, setResponseError] = useState<string | null>(null);
 
   useEffect(() => {
     async function cityStateFunction() {
@@ -30,13 +30,15 @@ export default function SearchStations() {
 
   const handleSubmit = async () => {
     setLoading(true);
-    setResponseError(0);
+    setResponseError(null);
     setResponse(null);
     const apiResponse = await fetch(`/api/searchStations/${validInput}`);
     const apiResponseVal = await apiResponse.json();
-    apiResponseVal.status
-      ? setResponseError(apiResponseVal.status)
-      : setResponse(JSON.parse(apiResponseVal.result));
+
+    apiResponse.status === 200
+      ? setResponse(JSON.parse(apiResponseVal))
+      : setResponseError(apiResponseVal.errorMessage);
+
     setLoading(false);
   };
 
@@ -77,7 +79,7 @@ export default function SearchStations() {
               ? setValidInput(value?.cityName)
               : (() => {
                   setResponse(null);
-                  setResponseError(0);
+                  setResponseError(null);
                 })();
           }}
           onKeyDown={(event) => {
@@ -101,7 +103,7 @@ export default function SearchStations() {
       {loading && <ShowLoading />}
       {(response || !!responseError) &&
         (responseError ? (
-          <ShowError errorCode={responseError} />
+          <ShowError errorMessage={responseError} />
         ) : (
           <ShowContent responseData={response} />
         ))}
