@@ -8,7 +8,7 @@ export interface TrainSchedule {
     saturday: boolean;
     sunday: boolean;
     thursday: boolean;
-    tueday: boolean;
+    tuesday: boolean;
     wednesday: boolean;
   };
 }
