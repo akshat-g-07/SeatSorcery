@@ -5,7 +5,6 @@ export default function ShowContent({
 }: {
   responseData: TrainSchedule | null;
 }) {
-  console.log(responseData);
   return (
     <>
       <div className="w-full h-full font-semibold p-10 flex flex-col">
