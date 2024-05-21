@@ -4,14 +4,14 @@ import TextField from "@mui/material/TextField";
 import { ChangeEvent, useState } from "react";
 import { TrainInfoSuccess } from "./components/TrainInfoTypes";
 import ShowContent from "./components/ShowContent";
-import ShowError from "./components/ShowError";
 import ShowLoading from "./components/ShowLoading";
+import ShowError from "../components/ShowError";
 
 export default function TrainNumberPage() {
   const [validInput, setValidInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [length, setLength] = useState<number | null>();
-  const [responseError, setResponseError] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<string | null>(null);
   const [response, setResponse] = useState<TrainInfoSuccess | null>(null);
 
   const validateInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,8 @@ export default function TrainNumberPage() {
   const handleSubmit = async () => {
     setLoading(true);
     setResponse(null);
-    setResponseError(false);
+    setResponseError(null);
+
     const inputElement = document.getElementById("trainNumberToInfoVal");
     if (inputElement instanceof HTMLInputElement) {
       const inputElementValue = inputElement.value;
@@ -33,9 +34,10 @@ export default function TrainNumberPage() {
       );
       const apiResponseVal = await apiResponse.json();
 
-      apiResponseVal.status
-        ? setResponseError(true)
-        : setResponse(apiResponseVal.responseData);
+      apiResponse.status === 200
+        ? setResponse(apiResponseVal)
+        : setResponseError(apiResponseVal.errorMessage);
+
       setLoading(false);
     }
   };
@@ -76,7 +78,7 @@ export default function TrainNumberPage() {
       {loading && <ShowLoading />}
       {(response || responseError) &&
         (responseError ? (
-          <ShowError />
+          <ShowError errorMessage={responseError} />
         ) : (
           <ShowContent responseData={response} />
         ))}
