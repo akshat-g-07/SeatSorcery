@@ -5,12 +5,13 @@ import { ChangeEvent, useState } from "react";
 import { TrainSchedule } from "./components/TrainScheduleTypes";
 import ShowLoading from "./components/ShowLoading";
 import ShowContent from "./components/ShowContent";
-import ShowError from "../TrainNumberToInfo/components/ShowError";
+import ShowError from "../components/ShowError";
+
 export default function TrainSchedulePage() {
   const [validInput, setValidInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [length, setLength] = useState<number | null>();
-  const [responseError, setResponseError] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<string | null>(null);
   const [response, setResponse] = useState<TrainSchedule | null>(null);
 
   const validateInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ export default function TrainSchedulePage() {
   const handleSubmit = async () => {
     setLoading(true);
     setResponse(null);
-    setResponseError(false);
+    setResponseError(null);
     const inputElement = document.getElementById("trainScheduleVal");
     if (inputElement instanceof HTMLInputElement) {
       const inputElementValue = inputElement.value;
@@ -32,9 +33,10 @@ export default function TrainSchedulePage() {
       );
       const apiResponseVal = await apiResponse.json();
 
-      apiResponseVal.status
-        ? setResponseError(true)
-        : setResponse(apiResponseVal);
+      apiResponse.status === 200
+        ? setResponse(apiResponseVal)
+        : setResponseError(apiResponseVal.errorMessage);
+
       setLoading(false);
     }
   };
@@ -75,7 +77,7 @@ export default function TrainSchedulePage() {
       {loading && <ShowLoading />}
       {(response || responseError) &&
         (responseError ? (
-          <ShowError />
+          <ShowError errorMessage={responseError} />
         ) : (
           <ShowContent responseData={response} />
         ))}
