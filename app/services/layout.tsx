@@ -31,14 +31,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             Search Stations
           </Link>
           <Link
-            href={"/services/TrainNumberToName"}
+            href={"/services/TrainBetweenStations"}
             className={`py-1 hover:border-b-2 hover:border-primaryColor duration-100 my-3 ${
-              pathname === "/services/TrainNumberToName"
+              pathname === "/services/TrainBetweenStations"
                 ? "border-b-2 border-primaryColor"
                 : "border-0"
             }`}
           >
-            Train Number to Name
+            Train Between Stations
           </Link>
           <Link
             href={"/services/LiveTrainStatus"}
