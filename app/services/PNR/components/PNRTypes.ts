@@ -1,22 +1,64 @@
 export interface PNRDetails {
-  arrival_data: {
-    arrival_date: string;
-    arrival_time: string;
+  status: boolean;
+  code: number;
+  message: string;
+  error: string;
+  data: {
+    boardingInfo: {
+      trainId: number;
+      stationId: number;
+      arrivalTime: string;
+      departureTime: string;
+      haltTime: string;
+      stationCode: string;
+      stationName: string;
+      travellingDay: number;
+      distance: string;
+      platform: string;
+    };
+    destinationInfo: {
+      trainId: number;
+      stationId: number;
+      arrivalTime: string;
+      departureTime: string;
+      haltTime: string;
+      stationCode: string;
+      stationName: string;
+      travellingDay: number;
+      distance: string;
+      platform: string;
+    };
+    seatInfo: {
+      coach: string;
+      berth: string;
+      noOfSeats: number;
+    };
+    trainInfo: {
+      trainNo: string;
+      name: string;
+      boarding: string;
+      destination: string;
+      dt: string;
+      boardingDayCount: null | number;
+      fromStationName: null | string;
+      toStationName: null | string;
+      origin: null | string;
+    };
+    passengerInfo: {
+      currentCoach: string;
+      currentBerthNo: string;
+    }[];
+    trainRoutes: {
+      trainId: number;
+      stationId: number;
+      arrivalTime: string;
+      departureTime: string;
+      haltTime: string;
+      stationCode: string;
+      stationName: string;
+      travellingDay: number;
+      distance: string;
+      platform: string;
+    }[];
   };
-  boarding_station: string;
-  chart_status: string;
-  class: string;
-  departure_data: {
-    departure_date: string;
-    departure_time: string;
-  };
-  passenger: {
-    booking_status: string;
-    current_status: string;
-    name: string;
-  }[];
-  quota: string;
-  reservation_upto: string;
-  train_name: string;
-  train_number: string;
 }
