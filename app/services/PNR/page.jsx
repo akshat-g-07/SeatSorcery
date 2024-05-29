@@ -11,7 +11,7 @@ export default function PNRPage() {
   const [validInput, setValidInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [length, setLength] = useState<number | null>();
-  const [responseError, setResponseError] = useState<string | null>(null);
+  const [responseError, setResponseError] = useState<null>(null);
   const [response, setResponse] = useState<PNRDetails | null>(null);
 
   const validateInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +36,7 @@ export default function PNRPage() {
         : apiResponse.status === 500
         ? setResponseError(apiResponseVal.errorMessage)
         : setResponse(apiResponseVal);
+
       setLoading(false);
     }
   };
