@@ -1,23 +1,22 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
+// prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
   url  	    = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 model User {
-  id      String      @id @default(cuid())
-  name    String 
-  email   String  
-  isEmailVerified Boolean @default(false)
-  image         String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
   password      String?
   accounts      Account[]
-  isTwoFactorEnabled Boolean @default(false)
-  createdAt DateTime @default(now())
+  createdAt    DateTime   @default(now())
 }
 
 model Account {
