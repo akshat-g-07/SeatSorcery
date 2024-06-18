@@ -15,9 +15,15 @@ import { useTransition, useState } from "react";
 import { login } from "@/actions/login";
 import CardWrapper from "../components/CardWrapper";
 import { CircularProgress } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
-  const [error, setError] = useState<string | undefined>("");
+  const searchParams = useSearchParams();
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Please Try different method!"
+      : undefined;
+  const [error, setError] = useState<string | undefined>(urlError);
   const [isPending, startTransition] = useTransition();
   const form = useForm<LoginFormData>({
     defaultValues: {
@@ -41,7 +47,7 @@ export default function LoginPage() {
 
     startTransition(async () => {
       login(values).then((data) => {
-        setError(data?.error);
+        data?.error;
       });
     });
   };
