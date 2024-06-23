@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+   
     "dbSync": "npx prisma generate && npx prisma db push && npx prisma studio --browser opera"
   },
   "dependencies": {
