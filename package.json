@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+   
     
    
     "dbSync": "npx prisma generate && npx prisma db push && npx prisma studio --browser opera"
