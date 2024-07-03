@@ -31,7 +31,7 @@ export default function CardWrapper({
   footerButtonLabel: string;
 }) {
   return (
-    <div className="w-full h-auto my-10 min-h-[calc(100vh-6rem)] flex flex-col items-center justify-center">
+    <div className="w-full h-auto my-10 min-h-[calc(100vh-6rem)] flex flex-col items-center">
       <Card className="shadow-lg w-fit min-w-80">
         <CardHeader className="text-center">
           <CardTitle className="font-semibold text-xl">
