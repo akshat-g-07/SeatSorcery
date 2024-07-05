@@ -17,8 +17,7 @@ const Card = React.forwardRef<
 ))
 Card.displayName = "Card"
 
-Card.displayName = "Card"
-vhh
+
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
