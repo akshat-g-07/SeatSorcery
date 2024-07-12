@@ -1,12 +1,9 @@
 import { useEffect, useState, useTransition } from "react";
 import CardWrapper from "../../auth/components/CardWrapper";
 import { Input, InputAdornment } from "@mui/material";
-import DatePicker from "./DatePicker";
 import DirectionsRailwayIcon from "@mui/icons-material/DirectionsRailway";
 import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatReclineNormal";
 import { Button } from "@/components/ui/button";
-import WandSVG from "../../assests/WandSVG";
-import BlankStar from "../../assests/BlankStar";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -15,7 +12,17 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import FilledStar from "@/app/assests/FilledStart";
+import SorceryButton from "@/app/assests/SorceryButton";
+import { SorceryAnimation } from "@/app/assests/SorceryAnimation";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@radix-ui/react-popover";
+import { format } from "date-fns";
 
 const RequestPage = () => {
   const [userRequestError, setUserRequestError] = useState<string>();
@@ -31,43 +38,7 @@ const RequestPage = () => {
 
   useEffect(() => {
     if (isPending) {
-      const animatedDiv = document.getElementById("wandsvg");
-      const blankStarDiv = document.querySelectorAll(".blankStar");
-      const filledStarDiv = document.querySelectorAll(".filledStar");
-      animatedDiv!.classList.remove("rotate-0");
-      animatedDiv!.classList.add("rotate-6");
-      setTimeout(() => {
-        animatedDiv!.classList.remove("rotate-6");
-        animatedDiv!.classList.add("-rotate-12");
-      }, 300);
-      setTimeout(() => {
-        animatedDiv!.classList.remove("-rotate-12");
-        animatedDiv!.classList.add("rotate-0");
-      }, 600);
-      blankStarDiv.forEach((item) => {
-        setTimeout(() => {
-          item.classList.add("animate-[spin_0.5s_linear_infinite]");
-        }, 600);
-        setTimeout(() => {
-          item.classList.remove("animate-[spin_0.5s_linear_infinite]");
-          item.classList.add("hidden");
-        }, 1100);
-        setTimeout(() => {
-          item.classList.remove("hidden");
-        }, 1000 * 30);
-      });
-      filledStarDiv.forEach((item) => {
-        setTimeout(() => {
-          item.classList.remove("hidden");
-          item.classList.add("animate-[spin_0.5s_linear_infinite]");
-        }, 1100);
-        setTimeout(() => {
-          item.classList.remove("animate-[spin_0.5s_linear_infinite]");
-        }, 1600);
-        setTimeout(() => {
-          item.classList.add("hidden");
-        }, 1000 * 30);
-      });
+      SorceryAnimation();
     }
   }, [isPending]);
 
@@ -161,7 +132,42 @@ const RequestPage = () => {
               <div className="w-full flex items-start justify-center my-2">
                 <p className="mx-3 text-lg">on</p>
                 <div>
-                  <DatePicker form={form} />
+                  <FormField
+                    control={form.control}
+                    name="userTravelDate"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col">
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-[240px] justify-start text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, "dd-LL-yyy")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              fixedWeeks
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              initialFocus
+                              disabled={(date) => date < new Date()}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
               <div className="w-full flex items-start justify-center my-2">
@@ -227,30 +233,7 @@ const RequestPage = () => {
               <div className="w-full flex items-start justify-center my-8">
                 <Button type="submit">
                   Perform Sorcery
-                  <div className="h-8 w-8">
-                    <div className="h-2 w-full flex justify-around">
-                      <div className="w-1/3 h-full">
-                        <BlankStar classValues="blankStar w-full h-full" />
-                        <FilledStar classValues="filledStar hidden w-full h-full" />
-                      </div>
-                      <div className="w-1/3 h-full translate-y-1">
-                        <BlankStar classValues="blankStar w-full h-full" />
-                        <FilledStar classValues="filledStar hidden w-full h-full" />
-                      </div>
-                    </div>
-                    <div className="h-6 w-full flex justify-around">
-                      <div className="w-1/3 h-full flex items-center translate-x-0.5 translate-y">
-                        <BlankStar classValues="blankStar w-full h-full" />
-                        <FilledStar classValues="filledStar hidden w-full h-full" />
-                      </div>
-                      <div
-                        id="wandsvg"
-                        className="w-2/3 h-full duration-300 origin-bottom-right"
-                      >
-                        <WandSVG classValues="h-full scale-105 w-full -rotate-90" />
-                      </div>
-                    </div>
-                  </div>
+                  <SorceryButton />
                 </Button>
               </div>
             </div>
