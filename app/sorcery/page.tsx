@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import RequestPage from "./components/RequestPage";
+import PublishPage from "./components/PublishPage";
 
 const SorceryPage = () => {
   const [service, setService] = useState<"request" | "publish">("request");
@@ -41,7 +42,9 @@ const SorceryPage = () => {
             <RequestPage />
           </>
         ) : (
-          <></>
+          <>
+            <PublishPage />
+          </>
         )}
       </div>
     </>
