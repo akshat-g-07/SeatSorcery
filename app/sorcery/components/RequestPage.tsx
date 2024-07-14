@@ -23,10 +23,13 @@ import {
   PopoverContent,
 } from "@radix-ui/react-popover";
 import { format } from "date-fns";
+import { requestSeat } from "@/actions/requestSeat";
 
 const RequestPage = () => {
   const [userRequestError, setUserRequestError] = useState<string>();
   const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState<string | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const form = useForm<RequestFormData>({
     defaultValues: {
       userTrainNumber: "",
@@ -42,11 +45,13 @@ const RequestPage = () => {
     }
   }, [isPending]);
 
-  const onSubmit = (data: RequestFormData) => {
+  const onSubmit = (values: RequestFormData) => {
     setUserRequestError("");
+    setSuccess(undefined);
+    setError(undefined);
 
     const { userTrainNumber, userTravelDate, userSeatDetails, userReqDetails } =
-      data;
+      values;
 
     // if (!userTrainNumber) {
     //   setUserRequestError("Please Provide a Train Number!");
@@ -82,10 +87,10 @@ const RequestPage = () => {
     // }
 
     startTransition(async () => {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve("done");
-        }, 1000);
+      requestSeat(values).then((data) => {
+        setSuccess(data.success);
+        setError(data.error);
+        data.success && form.reset();
       });
     });
   };
@@ -107,6 +112,7 @@ const RequestPage = () => {
                 <p className="mx-3 text-lg">in</p>
                 <div>
                   <FormField
+                    disabled={isPending}
                     control={form.control}
                     name="userTrainNumber"
                     render={({ field }) => (
@@ -133,6 +139,7 @@ const RequestPage = () => {
                 <p className="mx-3 text-lg">on</p>
                 <div>
                   <FormField
+                    disabled={isPending}
                     control={form.control}
                     name="userTravelDate"
                     render={({ field }) => (
@@ -174,6 +181,7 @@ const RequestPage = () => {
                 <p className="mx-3 text-lg">in</p>
                 <div>
                   <FormField
+                    disabled={isPending}
                     control={form.control}
                     name="userSeatDetails"
                     render={({ field }) => (
@@ -201,6 +209,7 @@ const RequestPage = () => {
                 <p className="mx-3 text-lg">in</p>
                 <div>
                   <FormField
+                    disabled={isPending}
                     control={form.control}
                     name="userReqDetails"
                     render={({ field }) => (
@@ -230,8 +239,23 @@ const RequestPage = () => {
                   </span>
                 </FormMessage>
               )}
+              {(error || success) && (
+                <FormMessage
+                  className={`rounded-sm ${
+                    error ? "bg-destructive/90" : "bg-emerald-500/90"
+                  } p-2 mt-8`}
+                >
+                  <span
+                    className={`${
+                      error ? "text-destructive-foreground" : "text-white"
+                    }`}
+                  >
+                    {error || success}
+                  </span>
+                </FormMessage>
+              )}
               <div className="w-full flex items-start justify-center my-8">
-                <Button type="submit">
+                <Button type="submit" disabled={isPending}>
                   Perform Sorcery
                   <SorceryButton />
                 </Button>
