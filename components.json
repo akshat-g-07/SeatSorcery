@@ -1,7 +1,7 @@
 {
   
  
-  "tailwind": {
+  
     "config": "tailwind.config.ts",
     "css": "app/globals.css",
     "baseColor": "gray",
