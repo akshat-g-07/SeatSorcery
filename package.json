@@ -11,8 +11,6 @@
     
    
     
-    "react-hook-form": "^7.49.3",
-    "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
